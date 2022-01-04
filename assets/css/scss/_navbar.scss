@@ -1,0 +1,169 @@
+.header {
+  position: fixed;
+  width: 100%;
+
+  .header-container {
+    margin: 0 auto;
+    width: calc(100% - 8rem);
+    max-width: 90rem;
+    padding: 0 0.625rem;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 2rem;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      width: 100%;
+      align-items: center;
+    }
+
+    .navbar {
+      position: relative;
+
+      @media screen and (max-width: $mobile-breakpoint) {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        height: 100%;
+
+        li {
+          position: relative;
+          height: 100%;
+          display: flex;
+          align-items: center;
+
+          a {
+            display: block;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            transition: box-shadow 150ms ease-out;
+
+            &:focus {
+              box-shadow: 0 0 0 0.125rem $accent-color;
+            }
+          }
+        }
+      }
+    }
+
+    .toggle-mobile {
+      display: none;
+
+      @media screen and (max-width: $mobile-breakpoint) {
+        display: flex;
+        flex-flow: column;
+        align-items: flex-end;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 0.25rem;
+        transition: box-shadow 150ms ease-out;
+        cursor: pointer;
+        padding: 0.5rem;
+        gap: 0.5rem;
+        overflow: hidden;
+
+        &:focus {
+          box-shadow: 0 0 0 0.125rem $accent-color;
+        }
+
+        .stick {
+          position: relative;
+          display: block;
+          height: 2px;
+          background-color: $navbar-color;
+          transform-origin: right;
+          overflow: hidden;
+          transition: width 400ms ease;
+
+          &:before {
+            position: absolute;
+            content: '';
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background-color: $accent-color;
+            transition: width 50ms ease 10ms;
+          }
+
+          &:nth-child(1) {
+            width: 100%;
+          }
+
+          &:nth-child(2) {
+            width: 75%;
+          }
+
+          &:nth-child(3) {
+            width: 50%;
+          }
+        }
+
+        &.active {
+          .stick {
+            width: 0;
+            transition-duration: 200ms;
+
+            &:before {
+              animation: shadow 400ms ease;
+            }
+
+            &:nth-child(1) {
+              animation: stick1 200ms ease 200ms forwards;
+            }
+
+            &:nth-child(3) {
+              animation: stick3 200ms ease 200ms forwards;
+            }
+          }
+
+          @keyframes stick1 {
+            from {
+              width: 0%;
+              transform: rotate(-40deg);
+            }
+            to {
+              width: 100%;
+              transform: rotate(-40deg);
+            }
+          }
+
+          @keyframes stick3 {
+            from {
+              width: 0%;
+              transform: rotate(40deg);
+            }
+            to {
+              width: 100%;
+              transform: rotate(40deg);
+            }
+          }
+
+          @keyframes shadow {
+            0%,
+            100% {
+              width: 0;
+            }
+            15%,
+            85% {
+              width: 4px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+.header {
+  background-color: transparentize($navbar-background, 0.05);
+  backdrop-filter: blur(5px);
+
+  .logo-container {
+    margin: 0.75rem 0;
+    width: 10rem;
+    height: 3rem;
+    background: linear-gradient(
+      to bottom right,
+      transparentize($navbar-color, 0.75),
+      transparentize($navbar-color, 0.85)
+    );
+    border-radius: 0.5rem;
+  }
+
+  .navbar {
+    min-height: 3rem;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      min-height: unset;
+    }
+
+    a {
+      opacity: 0.75;
+      color: $navbar-color;
+      transition: opacity 0.2s ease-out;
+
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+
+      &:after {
+        position: absolute;
+        content: '';
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 0.25rem;
+        background: linear-gradient(to bottom right, $accent-color, lighten($accent-color, 5%));
+      }
+
+      &.active {
+        opacity: 1;
+
+        &:after {
+          animation: active 0.75s cubic-bezier(1, 0, 0.6, 1.2) forwards;
+
+          @keyframes active {
+            0% {
+              opacity: 0;
+              width: 0%;
+            }
+            25% {
+              opacity: 1;
+            }
+            100% {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

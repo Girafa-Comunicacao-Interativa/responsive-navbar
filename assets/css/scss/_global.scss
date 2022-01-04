@@ -1,0 +1,32 @@
+html {
+  font-size: 14px;
+
+  @media screen and (max-width: $lg) {
+    font-size: 87.5%;
+  }
+
+  @media screen and (min-width: $xxl) {
+    font-size: 112.5%;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
