@@ -28,7 +28,6 @@ class Navbar {
   }
 
   toggleMenu() {
-    console.log(this.header.classList.contains('display'))
     this.header.classList.contains('display') && this.header.classList.contains('show') ? this._closeMenu() : this._openMenu()
   }
 }
