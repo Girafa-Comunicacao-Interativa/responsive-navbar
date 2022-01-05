@@ -83,7 +83,7 @@
             transition: box-shadow 150ms ease-out;
 
             &:focus {
-              box-shadow: 0 0 0 0.125rem $accent-color;
+              box-shadow: 0 0 0 0.125rem $accent-color inset;
             }
           }
         }
