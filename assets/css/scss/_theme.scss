@@ -1,64 +1,151 @@
 .header {
   background-color: transparentize($navbar-background, 0.05);
-  backdrop-filter: blur(5px);
 
-  .logo-container {
-    margin: 0.75rem 0;
-    width: 10rem;
-    height: 3rem;
-    background: linear-gradient(
-      to bottom right,
-      transparentize($navbar-color, 0.75),
-      transparentize($navbar-color, 0.85)
-    );
-    border-radius: 0.5rem;
-  }
-
-  .navbar {
-    min-height: 3rem;
-
-    @media screen and (max-width: $mobile-breakpoint) {
-      min-height: unset;
+  .header-container {
+    .logo-container {
+      margin: 0.75rem 0;
+      width: 10rem;
+      height: 3rem;
+      background: linear-gradient(
+        to bottom right,
+        transparentize($navbar-color, 0.75),
+        transparentize($navbar-color, 0.85)
+      );
+      border-radius: 0.5rem;
     }
 
-    a {
-      opacity: 0.75;
-      color: $navbar-color;
-      transition: opacity 0.2s ease-out;
+    .navbar {
+      min-height: 3rem;
 
-      &:hover,
-      &:focus {
-        opacity: 1;
+      @media screen and (max-width: $mobile-breakpoint) {
+        min-height: unset;
+        padding: 4.5rem 0.625rem calc(20vh + 2rem);
+        background-color: transparentize($navbar-background, 0.05);
       }
 
-      &:after {
-        position: absolute;
-        content: '';
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 0.25rem;
-        background: linear-gradient(to bottom right, $accent-color, lighten($accent-color, 5%));
-      }
+      ul {
+        gap: 2rem;
 
-      &.active {
-        opacity: 1;
-
-        &:after {
-          animation: active 0.75s cubic-bezier(1, 0, 0.6, 1.2) forwards;
-
-          @keyframes active {
-            0% {
-              opacity: 0;
-              width: 0%;
-            }
-            25% {
-              opacity: 1;
-            }
-            100% {
-              width: 100%;
+        li {
+          @media screen and (max-width: $mobile-breakpoint) {
+            @for $el from 1 through 25 {
+              &:nth-child(#{$el}) a {
+                transition-delay: #{$el * 0.1}s;
+              }
             }
           }
+
+          a {
+            opacity: 0.75;
+            transition: opacity 0.2s ease-out;
+
+            @media screen and (max-width: $mobile-breakpoint) {
+              padding: 0;
+              line-height: 1;
+              font-size: 3rem;
+              transform: translateY(-4rem) skewY(-15deg);
+              opacity: 0;
+              transition: 500ms ease;
+              transition-property: transform, opacity;
+            }
+
+            &:hover,
+            &:focus {
+              opacity: 1;
+            }
+
+            &:after {
+              position: absolute;
+              content: '';
+              bottom: 0;
+              left: 0;
+              width: 0;
+              height: 0.25rem;
+              background: linear-gradient(to bottom right, $accent-color, lighten($accent-color, 5%));
+            }
+
+            &.active {
+              opacity: 1;
+
+              &:after {
+                animation: active 0.75s cubic-bezier(1, 0, 0.6, 1.2) forwards;
+
+                @media screen and (max-width: $mobile-breakpoint) {
+                  display: none;
+                }
+
+                @keyframes active {
+                  0% {
+                    opacity: 0;
+                    width: 0%;
+                  }
+                  25% {
+                    opacity: 1;
+                  }
+                  100% {
+                    width: 100%;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .social {
+        display: none;
+
+        @media screen and (max-width: $mobile-breakpoint) {
+          display: flex;
+          flex-flow: row;
+          align-items: center;
+          gap: 1.5rem;
+        }
+
+        a {
+          display: flex;
+          width: 1.75rem;
+          height: 1.75rem;
+          align-items: center;
+          justify-content: center;
+
+          @media screen and (max-width: $mobile-breakpoint) {
+            @for $el from 1 through 25 {
+              &:nth-child(#{$el}) img {
+                transition-delay: #{$el * 0.1 + 0.3}s;
+              }
+            }
+          }
+
+          img {
+            max-width: 100%;
+            max-height: 100%;
+            filter: invert(1);
+            opacity: 0;
+            transform: scale3d(0.7, 0.7, 1);
+            transition: 500ms ease;
+            transition-property: opacity, transform;
+          }
+        }
+      }
+    }
+  }
+
+  &.show {
+    .header-container {
+      .navbar {
+        ul li a {
+          transform: translateY(0) skew(0deg);
+          opacity: 0.7;
+
+          &.active {
+            opacity: 1;
+          }
+        }
+
+        .social a img {
+          opacity: 1;
+          transform: scale3d(1, 1, 1);
         }
       }
     }
